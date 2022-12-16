@@ -8,14 +8,20 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.restoapp.models.Order;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+
+import java.io.Serializable;
 
 public class Home extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     MenuFragment menuFragment = new MenuFragment();
     OrderFragment orderFragment = new OrderFragment();
     ProfileFragment profileFragment = new ProfileFragment();
+    ProductFragment productFragment = new ProductFragment();
+
+    Order order = new Order();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +37,14 @@ public class Home extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putInt("accountID", accountID);
         profileFragment.setArguments(bundle);
+
+        //Serializable order = getIntent().getSerializableExtra("order");
+        //Bundle mBundle = new Bundle();
+        //mBundle.setClassLoader(Order.class.getClassLoader());
+        //mBundle.putSerializable("order", order);
+        //orderFragment.setArguments(mBundle);
+        //productFragment.setArguments(mBundle);
+        //menuFragment.setArguments(mBundle);
 
         getSupportFragmentManager()
                 .beginTransaction()

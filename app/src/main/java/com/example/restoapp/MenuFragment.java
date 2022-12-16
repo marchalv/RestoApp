@@ -46,7 +46,7 @@ public class MenuFragment extends Fragment {
             @Override
             public void onResponse(Call<ArrayList<Meal>> call, Response<ArrayList<Meal>> response) {
                 mealsArrayList = response.body();
-                for (int i = 0; i < mealsArrayList.size(); i++);
+                //for (int i = 0; i < mealsArrayList.size(); i++);
                 Custom custom = new Custom(mealsArrayList, getActivity(), R.layout.adapter_item);
                 listView.setAdapter(custom);
             }

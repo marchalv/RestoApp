@@ -1,12 +1,14 @@
 package com.example.restoapp;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.restoapp.models.Meal;
 
@@ -54,14 +56,19 @@ public class Custom extends BaseAdapter {
         viewHolder.price = convertView.findViewById(R.id.item_price);
         viewHolder.itemIconView = convertView.findViewById(R.id.item_icon);
 
-
         Meal meal = mealsArrayList.get(position);
         viewHolder.name.setText(meal.getName());
         viewHolder.price.setText(meal.getPrice() + " €");
-        String resourceName= "item_" + meal.getImageURL() + "_icon";
-        int resId = context.getResources().getIdentifier(resourceName, "drawable",context.getPackageName());
-        viewHolder.itemIconView.setImageResource(resId);
+        int resId = context.getResources().getIdentifier("item_" + meal.getImageURL() + "_icon", "drawable",context.getPackageName());
+        viewHolder.itemIconView.setImageDrawable(context.getResources().getDrawable(resId));
 
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ProductFragment productFragment = new ProductFragment(meal);
+                ((Home)context).getSupportFragmentManager().beginTransaction().replace(R.id.nav_fragment, productFragment).commit();
+            }
+        });
         return convertView;
     }
 }
